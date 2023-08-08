@@ -22,5 +22,5 @@ def adivinhar_palavra(palavra_secreta):
 # Palavra secreta para o jogo
 palavra_secreta = "python"
 
-
+# Chamar a função para iniciar o jogo
 adivinhar_palavra(palavra_secreta)
