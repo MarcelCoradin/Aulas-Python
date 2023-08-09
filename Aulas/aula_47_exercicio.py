@@ -1,26 +1,49 @@
-def adivinhar_palavra(palavra_secreta):
-    tentativas = 0
-    palavra_adivinhada = ['*'] * len(palavra_secreta)
+"""
+Faça um jogo para o usuário adivinhar qual
+a palavra secreta.
+- Você vai propor uma palavra secreta
+qualquer e vai dar a possibilidade para
+o usuário digitar apenas uma letra.
+- Quando o usuário digitar uma letra, você 
+vai conferir se a letra digitada está
+na palavra secreta.
+    - Se a letra digitada estiver na
+    palavra secreta; exiba a letra;
+    - Se a letra digitada não estiver
+    na palavra secreta; exiba *.
+Faça a contagem de tentativas do seu
+usuário.
+"""
+import os
 
-    print("Adivinhe a palavra secreta!")
+palavra_secreta = 'perfume'
+letras_acertadas = ''
+numero_tentativas = 0
 
-    while '*' in palavra_adivinhada:
-        letra = input("Digite uma letra: ").lower()
-        tentativas += 1
+while True:
+    letra_digitada = input('Digite uma letra: ')
+    numero_tentativas += 1
 
-        if letra in palavra_secreta:
-            for i in range(len(palavra_secreta)):
-                if palavra_secreta[i] == letra:
-                    palavra_adivinhada[i] = letra
+    if len(letra_digitada) > 1:
+        print('Digite apenas uma letra.')
+        continue
+
+    if letra_digitada in palavra_secreta:
+        letras_acertadas += letra_digitada
+
+    palavra_formada = ''
+    for letra_secreta in palavra_secreta:
+        if letra_secreta in letras_acertadas:
+            palavra_formada += letra_secreta
         else:
-            print("Letra não encontrada na palavra secreta. Tente novamente.")
+            palavra_formada += '*'
 
-        print("Palavra atual:", " ".join(palavra_adivinhada))
+    print('Palavra formada:', palavra_formada)
 
-    print(f"Parabéns! Você adivinhou a palavra secreta '{palavra_secreta}' em {tentativas} tentativas.")
-
-# Palavra secreta para o jogo
-palavra_secreta = "python"
-
-# Chamar a função para iniciar o jogo
-adivinhar_palavra(palavra_secreta)
+    if palavra_formada == palavra_secreta:
+        os.system('clear')
+        print('VOCÊ GANHOU!! PARABÉNS!')
+        print('A palavra era', palavra_secreta)
+        print('Tentativas:', numero_tentativas)
+        letras_acertadas = ''
+        numero_tentativas = 0
